@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Negocios DENUE</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <style>
+        /* Estilo para que el mapa ocupe toda la ventana visible */
+        #map { 
+            height: 100vh; 
+            width: 100%; 
+        }
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+        // Coordenadas iniciales (ej. Baja California, México)
+        // Puedes ajustarlas a una ubicación más representativa de tus datos
+        const LATITUD_CENTRO = 31.866; 
+        const LONGITUD_CENTRO = -116.602;
+        const ZOOM_INICIAL = 10;
+
+        // Inicializar el mapa
+        const map = L.map('map').setView([LATITUD_CENTRO, LONGITUD_CENTRO], ZOOM_INICIAL);
+
+        // Añadir capa de mapas (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> | Datos DENUE INEGI',
+            maxZoom: 19,
+        }).addTo(map);
+
+        // Función para cargar los datos desde Flask y colocar los pines
+        async function cargarNegocios() {
+            try {
+                // Realizar la petición al endpoint de Flask
+                const response = await fetch('/api/datos_negocios');
+                const negocios = await response.json();
+                
+                console.log(`Cargados ${negocios.length} negocios.`);
+
+                // Iterar sobre cada negocio y añadir un marcador
+                negocios.forEach(negocio => {
+                    const lat = negocio.latitud;
+                    const lon = negocio.longitud;
+                    const nombre = negocio.nom_estab;
+                    
+                    if (lat && lon) {
+                        // Crear el marcador (Pin)
+                        const marker = L.marker([lat, lon]).addTo(map);
+
+                        // Añadir un popup con el nombre del establecimiento
+                        marker.bindPopup(`<b>${nombre}</b>`);
+                    }
+                });
+
+            } catch (error) {
+                console.error('Error al cargar los datos de negocios:', error);
+            }
+        }
+
+        // Ejecutar la función para poblar el mapa
+        cargarNegocios();
+    </script>
+</body>
+</html>
