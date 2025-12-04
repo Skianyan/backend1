@@ -1,72 +1,89 @@
 import pandas as pd
-from flask import Flask, render_template, jsonify
-import os
+from flask import Flask, request, jsonify, render_template
 
-# --- Configuración de Flask ---
+# --- Inicialización y Carga de Datos ---
 app = Flask(__name__)
 
-# Nombre del archivo de datos
-DATA_FILE = 'Denue2024mod.csv'
+# Nombre del archivo CSV subido
+CSV_FILE = 'Denue2024mod.csv' 
 
-# --- 1. Carga y Preparación de Datos con Pandas ---
-def cargar_datos_denue():
-    """Carga el CSV, selecciona las columnas de interés y las limpia."""
+try:
+    # Cargar el archivo CSV en un DataFrame de pandas una sola vez al inicio
+    # Esto asume que el archivo tiene las columnas 'latitud' y 'longitud'
+    # Usamos low_memory=False para evitar warnings si las columnas tienen tipos mixtos
+    df_negocios = pd.read_csv(CSV_FILE, low_memory=False)
     
-    if not os.path.exists(DATA_FILE):
-        print(f"ERROR: No se encuentra el archivo de datos: {DATA_FILE}")
-        return []
+    # ⚠️ Importante: Asegurar que las columnas de latitud y longitud sean numéricas
+    # Reemplaza 'latitud' y 'longitud' si tus columnas tienen nombres diferentes
+    df_negocios['latitud'] = pd.to_numeric(df_negocios['latitud'], errors='coerce')
+    df_negocios['longitud'] = pd.to_numeric(df_negocios['longitud'], errors='coerce')
+    
+    # Eliminar filas con valores no numéricos (NaN) después de la conversión
+    df_negocios.dropna(subset=['latitud', 'longitud'], inplace=True)
+    
+    print(f"✅ Datos cargados correctamente. Total de negocios: {len(df_negocios)}")
+    
+except FileNotFoundError:
+    print(f"❌ Error: El archivo {CSV_FILE} no se encontró.")
+    df_negocios = pd.DataFrame() # Crear un DataFrame vacío para evitar errores
+except Exception as e:
+    print(f"❌ Error al cargar o procesar el CSV: {e}")
+    df_negocios = pd.DataFrame()
 
-    try:
-        # Intenta leer el archivo especificando el delimitador común en DENUE: '|' (pipe)
-        # y la codificación para manejar caracteres especiales del español.
-        df = pd.read_csv(DATA_FILE, encoding='latin1', sep=',') 
-        
-        # Si el error persiste, prueba con otro delimitador, como el punto y coma:
-        # df = pd.read_csv(DATA_FILE, encoding='latin1', sep=';')
-        
-        # Verifica las primeras columnas para confirmar que se leyó correctamente
-        print("Columnas leídas exitosamente:", df.columns.tolist()[:5], "...") 
-
-        # Selecciona las columnas necesarias
-        data = df[['id_cliente', 'nom_estab', 'latitud', 'longitud']].copy()
-        
-        # ... [El resto del código de limpieza y conversión permanece igual] ...
-        
-        # Convierte las columnas de latitud y longitud a numérico
-        data['latitud'] = pd.to_numeric(data['latitud'], errors='coerce')
-        data['longitud'] = pd.to_numeric(data['longitud'], errors='coerce')
-        data.dropna(subset=['latitud', 'longitud'], inplace=True)
-        
-        data_json = data.to_dict('records')
-        
-        return data_json
-        
-    except Exception as e:
-        print(f"Ocurrió un error al procesar el archivo CSV: {e}")
-        return []
-
-# Carga los datos una sola vez al iniciar la aplicación para optimizar
-NEGOCIOS_DATA = cargar_datos_denue()
-
-# --- 2. Rutas de Flask ---
-
-# Ruta principal: Muestra el mapa
 @app.route('/')
 def index():
-    """Renderiza la plantilla HTML del mapa."""
-    # Puedes pasar la cantidad de negocios cargados como información en la plantilla
-    num_negocios = len(NEGOCIOS_DATA)
-    return render_template('index.html', num_negocios=num_negocios)
+    """
+    Ruta para servir la página principal (index.html).
+    """
+    return render_template('index.html')
 
-# Ruta API: Sirve los datos de ubicación en formato JSON
-@app.route('/api/datos_negocios')
-def datos_negocios():
-    """Retorna los datos de latitud, longitud y nombre del establecimiento."""
-    # Retorna la lista de diccionarios como JSON
-    return jsonify(NEGOCIOS_DATA)
+# ---------------------------------------------
 
-# --- Ejecución ---
+@app.route('/api/datos_negocios', methods=['GET'])
+def get_negocios_bbox():
+    """
+    Endpoint para filtrar negocios del CSV basados en el Bounding Box (BBOX).
+    """
+    
+    # 1. Verificar si hay datos cargados
+    if df_negocios.empty:
+        return jsonify({"error": "No hay datos cargados en el servidor."}), 500
+
+    # 2. Obtener los parámetros del BBOX (lat_min, lon_min, etc.)
+    try:
+        lat_min = float(request.args.get('lat_min'))
+        lon_min = float(request.args.get('lon_min'))
+        lat_max = float(request.args.get('lat_max'))
+        lon_max = float(request.args.get('lon_max'))
+    except (TypeError, ValueError):
+        # Manejar el caso donde los parámetros BBOX no se envían o no son válidos
+        return jsonify({"error": "Parámetros BBOX inválidos o faltantes."}), 400
+
+    # 3. Aplicar el filtro espacial usando pandas
+    
+    # Usamos una máscara booleana para filtrar el DataFrame
+    filtro = (
+        (df_negocios['latitud'] >= lat_min) & 
+        (df_negocios['latitud'] <= lat_max) &
+        (df_negocios['longitud'] >= lon_min) & 
+        (df_negocios['longitud'] <= lon_max)
+    )
+    
+    # Aplicar el filtro
+    df_filtrado = df_negocios[filtro]
+    
+    # 4. Seleccionar solo las columnas necesarias para la respuesta
+    # Nota: Si tu CSV usa nombres diferentes, ajústalos aquí
+    datos_respuesta = df_filtrado[['nom_estab', 'latitud', 'longitud']]
+    
+    # 5. Convertir el DataFrame filtrado a un formato JSON compatible con el frontend
+    # 'records' genera una lista de diccionarios, que es ideal para JavaScript
+    return jsonify(datos_respuesta.to_dict('records'))
+
+# ---------------------------------------------
+
 if __name__ == '__main__':
-    # Ejecuta el servidor Flask
-    # (debug=True es útil para desarrollo)
+    # El archivo index.html debe estar en la carpeta 'templates' o se debe configurar la ruta
+    # Para el ejemplo, si solo tienes el index.html y el app.py en la misma carpeta,
+    # puedes usar un puerto diferente si es necesario.
     app.run(debug=True)
