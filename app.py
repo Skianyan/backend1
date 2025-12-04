@@ -6,7 +6,7 @@ import os
 app = Flask(__name__)
 
 # Nombre del archivo de datos
-DATA_FILE = 'Denue2024.csv'
+DATA_FILE = 'Denue2024mod.csv'
 
 # --- 1. Carga y Preparación de Datos con Pandas ---
 def cargar_datos_denue():
