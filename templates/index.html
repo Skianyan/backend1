@@ -51,7 +51,7 @@
             // Si el zoom está por debajo del mínimo, no cargamos pines para grandes áreas
             if (map.getZoom() < ZOOM_MINIMO_CARGA) {
                 visibleMarkers.clearLayers(); // Aseguramos que no haya pines visibles
-                console.log('Zoom insuficiente. Pines ocultos.');
+                //console.log('Zoom insuficiente. Pines ocultos.');
                 return;
             }
 
@@ -77,21 +77,82 @@
                 // 3. Limpiar el mapa antes de dibujar los nuevos pines
                 visibleMarkers.clearLayers();
                 
-                console.log(`Cargados ${negocios.length} negocios para la vista actual.`);
+                //console.log(`Cargados ${negocios.length} negocios para la vista actual.`);
 
-                // 4. Iterar sobre cada negocio y añadir un marcador al grupo
+                // 4. Iterar sobre cada negocio (Asegurar que toda la lógica de pin esté aquí)
                 negocios.forEach(negocio => {
                     const lat = negocio.latitud;
                     const lon = negocio.longitud;
-                    const nombre = negocio.nom_estab;
-                    
-                    if (lat && lon) {
-                        const marker = L.marker([lat, lon]);
-                        marker.bindPopup(`<b>${nombre}</b>`);
-                        
-                        visibleMarkers.addLayer(marker);
+
+                    if (!lat || !lon) {
+                        return;
                     }
+
+                    const nombre       = negocio.nom_estab   || 'Sin nombre';
+                    const razonSocial  = negocio.raz_social  || '';
+                    const localidad    = negocio.localidad   || '';
+                    const actividad    = negocio.nombre_act  || '';
+                    const tipoAsent    = negocio.tipo_asent  || '';
+                    const telefono     = negocio.telefono    || '';
+                    const correo       = negocio.correoelec  || '';
+                    const webRaw       = negocio.www         || '';
+                    const municipio    = negocio.municipio   || '';
+                    const codPostal    = negocio.cod_postal  || '';
+
+                    // Normalizar URL
+                    let web = webRaw;
+                    if (web && !web.toLowerCase().startsWith('http')) {
+                        web = 'http://' + web;
+                    }
+
+                    const marker = L.marker([lat, lon]);
+
+                    // Construcción del contenido del popup
+                    let html = '<div>';
+
+                    // Línea principal: nombre comercial + razón social
+                    html += `<b>${nombre}</b>`;
+                    if (razonSocial) {
+                        html += `<br><small>${razonSocial}</small>`;
+                    }
+                    html += '<br>';
+
+                    // Localización (tipo de asentamiento + localidad + municipio + CP)
+                    const partesLoc = [];
+                    if (tipoAsent) partesLoc.push(tipoAsent);
+                    if (localidad) partesLoc.push(localidad);
+                    if (municipio) partesLoc.push(municipio);
+                    if (codPostal) partesLoc.push('CP ' + codPostal);
+
+                    if (partesLoc.length > 0) {
+                        html += partesLoc.join(' - ') + '<br>';
+                    }
+
+                    // Actividad económica
+                    if (actividad) {
+                        html += `<em>${actividad}</em><br>`;
+                    }
+
+                    // Datos de contacto
+                    if (telefono || correo || web) {
+                        html += '<hr style="margin:4px 0;">';
+                        if (telefono) {
+                            html += `Tel: ${telefono}<br>`;
+                        }
+                        if (correo) {
+                            html += `Correo: <a href="mailto:${correo}">${correo}</a><br>`;
+                        }
+                        if (web) {
+                            html += `Web: <a href="${web}" target="_blank" rel="noopener">${webRaw}</a>`;
+                        }
+                    }
+
+                    html += '</div>';
+
+                    marker.bindPopup(html);
+                    visibleMarkers.addLayer(marker);
                 });
+
 
             } catch (error) {
                 console.error('Error al cargar los datos de negocios:', error);

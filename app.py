@@ -1,89 +1,174 @@
 import pandas as pd
+import math
 from flask import Flask, request, jsonify, render_template
+import logging 
 
-# --- Inicialización y Carga de Datos ---
+pd.options.mode.chained_assignment = None
+
+# --- CONFIGURACIÓN DE ARCHIVOS ---
+FILE_EXTENSION = '.csv'
+FOLDER_LOCATION = 'data/'
+
+# Asegúrate de que estos nombres de archivo coincidan exactamente con tus CSV
+FILE_DATOS = FOLDER_LOCATION + 'Denue2024 - Datos' + FILE_EXTENSION
+FILE_MUNICIPIO = FOLDER_LOCATION + 'Denue2024 - Dic_Municipio' + FILE_EXTENSION
+FILE_DIRECCION = FOLDER_LOCATION + 'Denue2024 - Direccion' + FILE_EXTENSION
+FILE_CONTACTO = FOLDER_LOCATION + 'Denue2024 - Contacto' + FILE_EXTENSION
+FILE_LOCALIDAD = FOLDER_LOCATION + 'Denue2024 - Dic_Localidad' + FILE_EXTENSION
+FILE_ACTIVIDAD = FOLDER_LOCATION + 'Denue2024 - Dic_Actividad' + FILE_EXTENSION
+FILE_TIPOASENT = FOLDER_LOCATION + 'Denue2024 - Dic_TipoAsent' + FILE_EXTENSION
+
+# --- Inicialización de Flask ---
 app = Flask(__name__)
+# DataFrame Maestro para almacenar todos los datos unidos
+df_maestro = pd.DataFrame() 
 
-# Nombre del archivo CSV subido
-CSV_FILE = 'Denue2024mod.csv' 
+def load_master_dataframe():
+    """
+    Carga y une todos los catálogos necesarios en un solo DataFrame maestro.
+    """
+    global df_maestro
 
-try:
-    # Cargar el archivo CSV en un DataFrame de pandas una sola vez al inicio
-    # Esto asume que el archivo tiene las columnas 'latitud' y 'longitud'
-    # Usamos low_memory=False para evitar warnings si las columnas tienen tipos mixtos
-    df_negocios = pd.read_csv(CSV_FILE, low_memory=False)
-    
-    # ⚠️ Importante: Asegurar que las columnas de latitud y longitud sean numéricas
-    # Reemplaza 'latitud' y 'longitud' si tus columnas tienen nombres diferentes
-    df_negocios['latitud'] = pd.to_numeric(df_negocios['latitud'], errors='coerce')
-    df_negocios['longitud'] = pd.to_numeric(df_negocios['longitud'], errors='coerce')
-    
-    # Eliminar filas con valores no numéricos (NaN) después de la conversión
-    df_negocios.dropna(subset=['latitud', 'longitud'], inplace=True)
-    
-    print(f"✅ Datos cargados correctamente. Total de negocios: {len(df_negocios)}")
-    
-except FileNotFoundError:
-    print(f"❌ Error: El archivo {CSV_FILE} no se encontró.")
-    df_negocios = pd.DataFrame() # Crear un DataFrame vacío para evitar errores
-except Exception as e:
-    print(f"❌ Error al cargar o procesar el CSV: {e}")
-    df_negocios = pd.DataFrame()
+    try:
+        # 1. Cargar tablas base y diccionarios
+        df_datos = pd.read_csv(FILE_DATOS, encoding='latin1')
+        df_mun   = pd.read_csv(FILE_MUNICIPIO, encoding='latin1')
+        df_dir   = pd.read_csv(FILE_DIRECCION, encoding='latin1')
+        df_cont  = pd.read_csv(FILE_CONTACTO, encoding='latin1')
+        df_loc   = pd.read_csv(FILE_LOCALIDAD, encoding='latin1')
+        df_act   = pd.read_csv(FILE_ACTIVIDAD, encoding='latin1')
+        df_ta    = pd.read_csv(FILE_TIPOASENT, encoding='latin1')
 
+        # 2. Unión principal con Datos
+        df = df_datos.copy()
+
+        # 2.1 Municipio
+        df = df.merge(
+            df_mun[['cve_mun', 'municipio']],
+            on='cve_mun',
+            how='left'
+        )
+
+        # 2.2 Localidad
+        df = df.merge(
+            df_loc[['cve_loc', 'localidad']],
+            on='cve_loc',
+            how='left'
+        )
+
+        # 2.3 Dirección -> para tipo de asentamiento y CP
+        df = df.merge(
+            df_dir[['id_cliente', 'id_tipo_asent', 'cod_postal']],
+            on='id_cliente',
+            how='left'
+        )
+
+        # 2.4 Diccionario de tipo de asentamiento
+        df = df.merge(
+            df_ta[['id_tipo_asent', 'tipo_asent']],
+            on='id_tipo_asent',
+            how='left'
+        )
+
+        # 2.5 Diccionario de actividad económica
+        df = df.merge(
+            df_act[['codigo_act', 'nombre_act']],
+            on='codigo_act',
+            how='left'
+        )
+
+        # 2.6 Datos de contacto (telefono, correo, www)
+        # Asegurar que las llaves estén en el mismo tipo
+        df_cont['id'] = df_cont['id'].astype('int64')
+        df = df.merge(
+            df_cont[['id', 'telefono', 'correoelec', 'www']],
+            left_on='id_cliente',
+            right_on='id',
+            how='left'
+        )
+        df.drop(columns=['id'], inplace=True)
+
+        # 3. Limpiar coordenadas inválidas
+        df = df[(df['latitud'].notna()) & (df['longitud'].notna())]
+
+        df_maestro = df.reset_index(drop=True)
+        print(f"✅ DataFrame Maestro creado. Total de negocios unidos: {len(df_maestro)}")
+
+    except FileNotFoundError as e:
+        print(f"❌ Error al cargar archivo: {e}. Asegúrate de que todos los CSV estén presentes.")
+        df_maestro = pd.DataFrame()
+    except Exception as e:
+        print(f"❌ Error durante la unión de datos: {e}")
+        df_maestro = pd.DataFrame()
+
+
+# --- RUTAS DE LA APLICACIÓN ---
+
+# 1. Ruta Raíz (Para servir el index.html)
 @app.route('/')
 def index():
-    """
-    Ruta para servir la página principal (index.html).
-    """
+    # Recuerda que index.html debe estar en una carpeta llamada 'templates'
     return render_template('index.html')
 
-# ---------------------------------------------
 
-@app.route('/api/datos_negocios', methods=['GET'])
-def get_negocios_bbox():
-    """
-    Endpoint para filtrar negocios del CSV basados en el Bounding Box (BBOX).
-    """
-    
-    # 1. Verificar si hay datos cargados
-    if df_negocios.empty:
-        return jsonify({"error": "No hay datos cargados en el servidor."}), 500
+# 2. Endpoint de API (Para la consulta BBOX)
+@app.route('/api/datos_negocios')
+def api_datos_negocios():
+    global df_maestro
+    if df_maestro is None or df_maestro.empty:
+        return jsonify({"error": "Datos no cargados"}), 500
 
-    # 2. Obtener los parámetros del BBOX (lat_min, lon_min, etc.)
+    # 1. Leer parámetros de la vista
     try:
         lat_min = float(request.args.get('lat_min'))
-        lon_min = float(request.args.get('lon_min'))
         lat_max = float(request.args.get('lat_max'))
+        lon_min = float(request.args.get('lon_min'))
         lon_max = float(request.args.get('lon_max'))
     except (TypeError, ValueError):
-        # Manejar el caso donde los parámetros BBOX no se envían o no son válidos
-        return jsonify({"error": "Parámetros BBOX inválidos o faltantes."}), 400
+        return jsonify({"error": "Parámetros de coordenadas inválidos"}), 400
 
-    # 3. Aplicar el filtro espacial usando pandas
-    
-    # Usamos una máscara booleana para filtrar el DataFrame
-    filtro = (
-        (df_negocios['latitud'] >= lat_min) & 
-        (df_negocios['latitud'] <= lat_max) &
-        (df_negocios['longitud'] >= lon_min) & 
-        (df_negocios['longitud'] <= lon_max)
+    # 2. Filtrar por bounding box
+    df_filtrado = df_maestro[
+        (df_maestro['latitud']  >= lat_min) &
+        (df_maestro['latitud']  <= lat_max) &
+        (df_maestro['longitud'] >= lon_min) &
+        (df_maestro['longitud'] <= lon_max)
+    ]
+
+    # 3. Seleccionar columnas que vas a exponer
+    columnas_salida = [
+        'nom_estab',     # Datos
+        'raz_social',    # Datos
+        'municipio',     # Dic_Municipio
+        'localidad',     # Dic_Localidad
+        'nombre_act',    # Dic_Actividad
+        'tipo_asent',    # Dic_TipoAsent
+        'telefono',      # Contacto
+        'correoelec',    # Contacto
+        'www',           # Contacto
+        'cod_postal',    # Direccion
+        'latitud',
+        'longitud',
+    ]
+    datos_respuesta = df_filtrado[columnas_salida].copy()
+
+    # Normalizar NaN -> None para que el JSON sea válido
+    datos_respuesta = datos_respuesta.astype(object).where(
+        pd.notnull(datos_respuesta),
+        None
     )
-    
-    # Aplicar el filtro
-    df_filtrado = df_negocios[filtro]
-    
-    # 4. Seleccionar solo las columnas necesarias para la respuesta
-    # Nota: Si tu CSV usa nombres diferentes, ajústalos aquí
-    datos_respuesta = df_filtrado[['nom_estab', 'latitud', 'longitud']]
-    
-    # 5. Convertir el DataFrame filtrado a un formato JSON compatible con el frontend
-    # 'records' genera una lista de diccionarios, que es ideal para JavaScript
-    return jsonify(datos_respuesta.to_dict('records'))
 
-# ---------------------------------------------
+    return jsonify(datos_respuesta.to_dict(orient='records'))
 
+
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
+
+# --- Ejecución de la Aplicación ---
 if __name__ == '__main__':
-    # El archivo index.html debe estar en la carpeta 'templates' o se debe configurar la ruta
-    # Para el ejemplo, si solo tienes el index.html y el app.py en la misma carpeta,
-    # puedes usar un puerto diferente si es necesario.
+    # Cargar y unir los datos antes de iniciar el servidor
+    load_master_dataframe()
+    
+    # Ejecutar el servidor Flask
+    # Nota: El puerto 5000 es el predeterminado
     app.run(debug=True)

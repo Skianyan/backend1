@@ -1,0 +1,492 @@
+localidad,cve_loc
+Ensenada                                                                                                      ,1
+Alisitos                                                                                                      ,2
+ABC (Los Canelos) [Empaque]                                                                                   ,3
+Buenavista                                                                                                    ,6
+El Campito                                                                                                    ,8
+Campo López                                                                                                   ,10
+Los Hermanos                                                                                                  ,15
+Brisamar [Campo]                                                                                              ,16
+El Bajío                                                                                                      ,17
+Bahía de los Ángeles                                                                                          ,22
+Campo César                                                                                                   ,24
+Santa Anita                                                                                                   ,25
+Cañada Verde                                                                                                  ,26
+Misión del Mar 1ra. y 2da. Sección                                                                            ,28
+Costa Bella                                                                                                   ,31
+Campo Ocotillos                                                                                               ,32
+Cuenca Lechera                                                                                                ,34
+Gaviotas [Curios]                                                                                             ,35
+El Descanso                                                                                                   ,36
+Colonia Morelos                                                                                               ,37
+Camalú                                                                                                        ,40
+Campo Daggets                                                                                                 ,43
+Cimarrón [Campo]                                                                                              ,47
+Cinco Islas [Campo]                                                                                           ,48
+Campo Lobo                                                                                                    ,49
+La Fonda [Campo Turístico]                                                                                    ,51
+Cristina [Campo]                                                                                              ,59
+Crucero Valle de la Trinidad (El Oasis)                                                                       ,60
+Kilómetro Cuarenta y Uno y Medio                                                                              ,61
+Ladrillera Pescador                                                                                           ,64
+Cataviña                                                                                                      ,68
+Ejido Plan Nacional Agrario                                                                                   ,69
+El Médano                                                                                                     ,73
+Medio Camino                                                                                                  ,74
+Misión Viejo                                                                                                  ,75
+El Morro                                                                                                      ,76
+Cielito Lindo                                                                                                 ,77
+El Morro Kilómetro Treinta y Ocho                                                                             ,78
+Colonia Benito Juárez                                                                                         ,79
+Colonia Concordia                                                                                             ,80
+Colonia Llamas                                                                                                ,81
+Colonia Lomas de San Ramón (Triquis)                                                                          ,82
+Rancho Evelia                                                                                                 ,83
+Playas la Misión                                                                                              ,84
+Colonia Nueva Era                                                                                             ,85
+Popotla                                                                                                       ,86
+Paso del Águila                                                                                               ,89
+Puerto Nuevo                                                                                                  ,90
+Cristo por su Mundo [Orfanatorio]                                                                             ,92
+Ejido Eréndira                                                                                                ,95
+Don Diego [Posada]                                                                                            ,99
+Ejido Licenciado Adolfo López Mateos                                                                          ,103
+Don Pancho (Villa Pacífico)                                                                                   ,104
+La Rumorosa                                                                                                   ,107
+Colonia Venustiano Carranza (La Carranza)                                                                     ,110
+Vicente Guerrero (Algodones)                                                                                  ,111
+Ejido General Leandro Valle                                                                                   ,112
+Francisco Zarco (Valle de Guadalupe)                                                                          ,114
+Ejido José María Morelos y Pavón                                                                              ,115
+Ejido Lic. Luis Echeverría Álvarez (Chula Vista)                                                              ,116
+Ejido Mesa de San Jacinto                                                                                     ,117
+Ejido Nueva Odisea (El Pabellón)                                                                              ,118
+Ejido Papalote                                                                                                ,121
+Ejido Profesor Graciano Sánchez                                                                               ,122
+Isla de Cedros                                                                                                ,124
+Ejido San Simón de Arriba                                                                                     ,125
+Ejido Valle Tranquilo                                                                                         ,126
+Ejido Villa Jesús María                                                                                       ,127
+Colonia Castro                                                                                                ,129
+El Testerazo                                                                                                  ,131
+El Barril                                                                                                     ,134
+Las Delicias                                                                                                  ,137
+Rodolfo Sánchez Taboada (Maneadero)                                                                           ,139
+La Poma [Campo]                                                                                               ,140
+Ejido Tamaulipas (Estación Cucapah)                                                                           ,141
+Las Encantadas [Campo]                                                                                        ,145
+El Chamizal [Rancho]                                                                                          ,150
+La Misión                                                                                                     ,151
+Los Amigos [Campo]                                                                                            ,153
+Luis Echeverría Álvarez (El Hongo)                                                                            ,155
+Los Delfines [Campo]                                                                                          ,156
+Delta (Estación Delta)                                                                                        ,159
+Rancho Santini                                                                                                ,160
+Ejido Monterrey (Colonia Batáquez)                                                                            ,161
+Terrazas del Mar                                                                                              ,162
+De Raúl [Centro Turístico]                                                                                    ,163
+Ejido Durango                                                                                                 ,169
+Mineral Real de Ángeles                                                                                       ,175
+El Faro                                                                                                       ,176
+Coronel Esteban Cantú                                                                                         ,184
+Ciudad Guadalupe Victoria (Kilómetro Cuarenta y Tres)                                                         ,185
+Ejido Punta Colnett (Punta Colonet)                                                                           ,186
+Octavios [Campo]                                                                                              ,188
+Real del Castillo Nuevo (Ojos Negros)                                                                         ,190
+Ejido Hermosillo                                                                                              ,192
+Terrazas del Pacífico                                                                                         ,193
+Venustiano Carranza                                                                                           ,194
+Ejido Miguel Hidalgo                                                                                          ,195
+Marena [Club]                                                                                                 ,196
+Martín Cuevas                                                                                                 ,197
+Playa de Oro                                                                                                  ,202
+Ejido Jalisco                                                                                                 ,203
+Ejido Jiquilpan                                                                                               ,206
+Puestas del Sol                                                                                               ,207
+Rancho Concordia                                                                                              ,209
+Colonia Ladrillera                                                                                            ,210
+Ejido Lázaro Cárdenas (La Mosca)                                                                              ,211
+Poblado Lázaro Cárdenas (La Veintiocho)                                                                       ,212
+Los Volcanes                                                                                                  ,218
+El Refugio                                                                                                    ,219
+Puertecitos                                                                                                   ,220
+Punta Bufeo [Campo Turístico]                                                                                 ,221
+Río Misión                                                                                                    ,222
+El Rincón                                                                                                     ,223
+El Rosario de Abajo                                                                                           ,224
+Punta Final (Villa Mar y Sol)                                                                                 ,225
+Ejido Sinaloa (Estación Kasey)                                                                                ,227
+Vista Marina                                                                                                  ,230
+Ciudad Morelos (Cuervos)                                                                                      ,231
+RV Park el Cachanilla                                                                                         ,234
+Nuevo León                                                                                                    ,237
+Santa Isabel del Mar                                                                                          ,238
+Lomas del Morro                                                                                               ,241
+Mar de Calafia                                                                                                ,242
+San Vicente                                                                                                   ,243
+Ninguno                                                                                                       ,244
+Las Flores                                                                                                    ,246
+El Sauzal de Rodríguez                                                                                        ,247
+Emiliano Zapata                                                                                               ,248
+El Refugio                                                                                                    ,249
+Ejido Pátzcuaro                                                                                               ,251
+Serena [Campo]                                                                                                ,254
+Estación Pescaderos (Kilómetro Treinta y Nueve)                                                               ,256
+Ejido Plan de Ayala                                                                                           ,258
+Colonia Pólvora                                                                                               ,259
+Familia Mata                                                                                                  ,260
+Ventana del Mar                                                                                               ,261
+Las Margaritas                                                                                                ,262
+Colonia la Puerta                                                                                             ,266
+Villas Mar de Cortez (Rancho Grande)                                                                          ,267
+Ejido Hechicera                                                                                               ,268
+Violeta (Playa Corrales)                                                                                      ,269
+Villa de Juárez (San Antonio de las Minas)                                                                    ,271
+Vista del Mar                                                                                                 ,272
+Casa del Rey [Fraccionamiento]                                                                                ,276
+Palmar Paradise [Centro Recreativo]                                                                           ,279
+Ejido Saltillo                                                                                                ,282
+Caracoles del Mar                                                                                             ,288
+El Florido                                                                                                    ,298
+Los Arroyos                                                                                                   ,300
+Montemar                                                                                                      ,301
+El Morro                                                                                                      ,304
+Puerto Popotla                                                                                                ,305
+Colonia José María Rodríguez Mérida (La Panga)                                                                ,311
+Ninguno                                                                                                       ,312
+Kilómetro Cuarenta y Tres                                                                                     ,314
+El Médano                                                                                                     ,316
+Centinela [Fraccionamiento]                                                                                   ,320
+Mar de Popotla                                                                                                ,322
+La Bufadora                                                                                                   ,329
+Los Alazanes                                                                                                  ,332
+Ejido el Choropo (Colonia Colorado Número Uno)                                                                ,333
+Nueva Colonia Hindú                                                                                           ,340
+El Chorizo (Colonia Colorado 1 Campo León Uno)                                                                ,342
+Candiles Dorados                                                                                              ,350
+Hacienda del Sol                                                                                              ,355
+Poblado Alfredo V. Bonfil                                                                                     ,358
+Villas de San Ángel                                                                                           ,361
+Ejido el Marítimo                                                                                             ,362
+Villas de Casa Blanca                                                                                         ,363
+Artesanías Popotla                                                                                            ,375
+Artesanías Popotla Dos                                                                                        ,376
+Ciudad de Misericordia                                                                                        ,377
+Los Cañaverales                                                                                               ,382
+Los Arroyos                                                                                                   ,384
+Rancho Campa                                                                                                  ,386
+Guzmán [Rancho]                                                                                               ,388
+El Paraíso                                                                                                    ,395
+Rocamar [Fraccionamiento]                                                                                     ,401
+Puente Quemado (Colonia Venustiano Carranza)                                                                  ,402
+Campo Mozqueda (Colonia Terrenos Indios)                                                                      ,411
+Calafia Paradaise Resort and Villas (Torres Calafia)                                                          ,414
+El Mirador [Fraccionamiento]                                                                                  ,418
+Rodríguez [Campo]                                                                                             ,419
+La Banderita                                                                                                  ,424
+Rancho la Hermosa [Casa Hogar]                                                                                ,427
+Ventura [Parcela Cincuenta y Tres]                                                                            ,432
+Potrero de en Medio                                                                                           ,444
+Benito Juárez (Ejido Tecolotes)                                                                               ,456
+Poblado Paredones                                                                                             ,459
+Ciudad Coahuila (Kilómetro Cincuenta y Siete)                                                                 ,461
+La Lobera                                                                                                     ,473
+La Mesa                                                                                                       ,475
+Familia Castro [Rancho]                                                                                       ,482
+La Pinta [Hotel]                                                                                              ,483
+La Trinidad                                                                                                   ,498
+La Ventana [Campo]                                                                                            ,500
+Salina Ometepec (NCPE Industrial Año de Juárez 1972)                                                          ,505
+Ejido Hipólito Rentería                                                                                       ,510
+Ejido Tula                                                                                                    ,514
+El Mirador (Colonia Independencia Económica)                                                                  ,522
+Las Sirenas                                                                                                   ,529
+Lira [Rancho]                                                                                                 ,533
+Las Dos Palmas                                                                                                ,542
+La Rosita                                                                                                     ,553
+Universidad de las Naciones                                                                                   ,570
+El Mezquitito                                                                                                 ,575
+Los Vientos                                                                                                   ,581
+Luis Rodríguez (El Vergel)                                                                                    ,583
+Lázaro Cárdenas                                                                                               ,585
+De los Niños [Rancho)                                                                                         ,600
+Misión Santa Gertrudis la Magna                                                                               ,603
+Molino Viejo                                                                                                  ,605
+San Antonio del Mar                                                                                           ,606
+El Porvenir (Guadalupe)                                                                                       ,617
+Ninguno                                                                                                       ,620
+Nuevo Centro de Población Padre Kino                                                                          ,628
+Nuevo Uruapan                                                                                                 ,630
+Playa Tranquila [Campo]                                                                                       ,654
+Rancho Viejo                                                                                                  ,657
+Calete                                                                                                        ,669
+Santa Teresita                                                                                                ,671
+El Ramajal                                                                                                    ,677
+Real del Mar                                                                                                  ,678
+Las Calabazas                                                                                                 ,682
+Punta Prieta                                                                                                  ,683
+Ranchito Meza                                                                                                 ,691
+Rancho Chaidez                                                                                                ,700
+Rancho Escondido                                                                                              ,711
+Rancho Jiménez                                                                                                ,721
+Rancho Orendain                                                                                               ,732
+San José                                                                                                      ,783
+San José                                                                                                      ,784
+Santa Candelaria                                                                                              ,819
+Santa Fe                                                                                                      ,823
+Santa María (Los Pinos)                                                                                       ,832
+Santa Rosaliíta                                                                                               ,837
+Santo Domingo                                                                                                 ,839
+Sara [Mina]                                                                                                   ,841
+Las Delicias                                                                                                  ,852
+Valle Dorado                                                                                                  ,858
+Venustiano Carranza (Santa María)                                                                             ,861
+Vicente Guerrero                                                                                              ,863
+Colonia las Palmas (Vista al Mar),874
+La Paleta [Establo]                                                                                           ,884
+Loma Tova                                                                                                     ,933
+Ejido Encinal                                                                                                 ,934
+Lázaro Cárdenas (Valle de la Trinidad)                                                                        ,935
+General Felipe Ángeles                                                                                        ,937
+Uruapan                                                                                                       ,942
+San Miguel [Rancho]                                                                                           ,995
+Rancho Jonathan                                                                                               ,1004
+San Joaquín                                                                                                   ,1012
+Emiliano Zapata                                                                                               ,1015
+La Puerta                                                                                                     ,1023
+Poblado Héroes de Chapultepec                                                                                 ,1025
+Las Olas                                                                                                      ,1050
+Valle Bonito                                                                                                  ,1060
+La Providencia                                                                                                ,1065
+San Antonio                                                                                                   ,1075
+Rancho Díaz                                                                                                   ,1085
+Las Rosas                                                                                                     ,1110
+Familia González Aguirre                                                                                      ,1134
+Ejido Mezquital                                                                                               ,1181
+San Isidro (Los Tres Juanes)                                                                                  ,1191
+Ejido Doctor Alberto Oviedo Mota (El Indiviso)                                                                ,1195
+San Inocencio (Proyecto México) [Casa Hogar]                                                                  ,1221
+Club Tijuana                                                                                                  ,1223
+La Calavera                                                                                                   ,1231
+Emiliano Zapata (Colonia Progreso)                                                                            ,1239
+La Puerta de Alcalá                                                                                           ,1254
+Ejido Tehuantepec (Santa Rosa)                                                                                ,1273
+Colonia Costa Azul                                                                                            ,1297
+Los Delfines                                                                                                  ,1298
+Santo Tomás [Establo]                                                                                         ,1309
+El Arenal                                                                                                     ,1317
+Familia Camarena                                                                                              ,1342
+San Antonio                                                                                                   ,1351
+Guerra [Taller]                                                                                               ,1359
+Los Federicos                                                                                                 ,1368
+Playa Blanca                                                                                                  ,1385
+Las Margaritas (Colonia Colorado Tres)                                                                        ,1388
+Rancho AGR                                                                                                    ,1393
+Rancho Cota                                                                                                   ,1402
+Parajes del Valle                                                                                             ,1421
+Rancho Gutiérrez                                                                                              ,1439
+La Jolla [Campo Turístico]                                                                                    ,1444
+La Esperanza                                                                                                  ,1448
+La Granjita                                                                                                   ,1451
+Cerro Prieto Cuatro                                                                                           ,1471
+Familia León (Colonia Colorado Número Tres)                                                                   ,1477
+Familia Manzo (Colonia Colorado Número Siete)                                                                 ,1481
+Rancho Ojay                                                                                                   ,1482
+Santa Clara                                                                                                   ,1497
+Crucero del Toluca (Ejido Toluca)                                                                             ,1542
+Familia Acosta                                                                                                ,1545
+Casa Guadalupe (Villa de la Paz)                                                                              ,1546
+Compuerta la 24 (Colonia Silva)                                                                               ,1564
+El Moro                                                                                                       ,1580
+Los Ángulos (Colonia Venustiano Carranza)                                                                     ,1581
+Bachoco (Colonia Cerro Prieto) [Avícola]                                                                      ,1594
+Los Campillo                                                                                                  ,1599
+Hacienda Tecate                                                                                               ,1603
+La Morita                                                                                                     ,1604
+Los Laureles                                                                                                  ,1615
+Los González                                                                                                  ,1619
+El Coyote                                                                                                     ,1636
+El Gandul                                                                                                     ,1642
+La División (Colonia Venustiano Carranza)                                                                     ,1653
+El Jojobal                                                                                                    ,1668
+Nejimex (Ganadera)                                                                                            ,1677
+Baja Malibú                                                                                                   ,1766
+Familia Barragán (Colonia Colorado Número Tres)                                                               ,1798
+Encanto del Mar                                                                                               ,1811
+San Miguel (Cíbolas de Mar)                                                                                   ,1812
+Hacienda del Mar                                                                                              ,1813
+Tecate Gateway                                                                                                ,1824
+Familia Calvillo (Colonia Osiris Parcela 5)                                                                   ,1832
+El Nevado                                                                                                     ,1834
+Terrazas de San Ángel                                                                                         ,1874
+La Joya                                                                                                       ,1875
+Villa del Campo                                                                                               ,1883
+La Recría [Rancho]                                                                                            ,1886
+Familia Chávez (Ejido Lázaro Cárdenas)                                                                        ,1896
+El Paraíso [Rancho]                                                                                           ,1904
+San Marino                                                                                                    ,1919
+Familia Johnston (El Gran Conejo) [Rancho]                                                                    ,1927
+Lomas de San Pedro                                                                                            ,1934
+Miguel Alemán                                                                                                 ,1954
+Ley del Servicio Civil                                                                                        ,1961
+Villarino (Campo Villarino) [Campamento Turístico]                                                            ,1962
+Casa para Pobres Desamparados                                                                                 ,1969
+Colonia la 27 (Campamento SARH Kilómetro Veintisiete)                                                         ,1975
+Valle de las Palmas [Etapa 1]                                                                                 ,1977
+Familia Estrada (Colonia Pólvora)                                                                             ,1998
+Santa Clara                                                                                                   ,2012
+Thomas Alva Edison [Parque Industrial]                                                                        ,2017
+Bella Vista                                                                                                   ,2030
+Cooperativa Jamec                                                                                             ,2033
+El Refugio                                                                                                    ,2049
+Treinta y Tres [Rancho]                                                                                       ,2071
+La Hermosa                                                                                                    ,2102
+Materiales Económicos del Campo                                                                               ,2113
+Familia Gómez (Colonia Cerro Prieto)                                                                          ,2123
+Laguna [Rancho]                                                                                               ,2125
+Familia Tovar                                                                                                 ,2127
+Familia González (Colonia Sonora)                                                                             ,2128
+Lomelí [Rancho]                                                                                               ,2136
+Door of Faith Orphanage [Orfanato]                                                                            ,2141
+Buena Vista                                                                                                   ,2142
+Punta Piedra                                                                                                  ,2151
+Mal Paso                                                                                                      ,2154
+Puerto Salina                                                                                                 ,2157
+Angels [Campo]                                                                                                ,2159
+Úrsulo Galván                                                                                                 ,2160
+Rancho Cañón Buena Vista (El Zorrillo)                                                                        ,2183
+La Grulla SC (La Grulla) [Club de Cazadores]                                                                  ,2190
+Familia Hernández (Ejido Durango)                                                                             ,2204
+Playa Dorada [Campo]                                                                                          ,2221
+Familia Jiménez (Veracruz Dos)                                                                                ,2237
+Familia Limón (Colonia Primavera)                                                                             ,2274
+Familia Lizalde (Ejido Benito Juárez)                                                                         ,2277
+Familia Llamas (Ejido Campeche)                                                                               ,2282
+Familia Madrigal (Ejido Morelia)                                                                              ,2329
+Familia Martínez (Ejido Hermosillo)                                                                           ,2358
+Familia Meza (Colonia Sonora)                                                                                 ,2408
+Familia Montes (Colonia Progreso)                                                                             ,2424
+Doña Bertha [Rancho]                                                                                          ,2435
+Familia Mosqueda (Veracruz Dos)                                                                               ,2449
+LA Cetto [Compañía Vinícola]                                                                                  ,2456
+El Venado                                                                                                     ,2463
+El Rosario                                                                                                    ,2465
+Familia Núñez (Colonia Progreso)                                                                              ,2473
+Familia Alaniz                                                                                                ,2482
+San Antonio de las Minas                                                                                      ,2485
+Ejido Ley Federal de Reforma Agraria (El Tigre)                                                               ,2487
+El Parral                                                                                                     ,2490
+Rancho Cortez                                                                                                 ,2492
+Villas de San Miguel                                                                                          ,2502
+Familia Pantoja (Colonia Centinela)                                                                           ,2507
+Colonia Herradura                                                                                             ,2517
+Quinta Riviera (Rancho Rocha)                                                                                 ,2518
+Lucio Blanco [Granjas Agrícolas]                                                                              ,2539
+Los Gringos                                                                                                   ,2580
+Zona del Canal (Veracruz Dos)                                                                                 ,2616
+Familia Rubio García (Colonia Colorado Número Siete)                                                          ,2653
+Baja Mar San Diego                                                                                            ,2691
+Playa Saldamando                                                                                              ,2776
+Familia Verdugo (Ejido Tamaulipas Parcela Veintiocho)                                                         ,2818
+Familia Verdugo (Ejido Cucapah Mestizo)                                                                       ,2820
+Familia Mendoza (Colonia Progreso)                                                                            ,2836
+Familia Rodelo Salgado (Colonia Cerro Prieto)                                                                 ,2855
+Calizas [Industrias]                                                                                          ,2887
+Kilómetro Siete Punto Cinco (Colonia Colorado Uno)                                                            ,2893
+Familia Lamarque (Colonia Chapultepec)                                                                        ,2900
+Familia Figueroa                                                                                              ,2952
+El Caracol (Andrade Ejido Nuevo León)                                                                         ,3108
+Ejido 27 de Enero                                                                                             ,3122
+El Solitario (Ejido Chihuahua)                                                                                ,3124
+Rancho Fonseca (Ejido Hermosillo)                                                                             ,3135
+Campo Número Siete                                                                                            ,3170
+Arnáiz                                                                                                        ,3172
+Lomas del Mar                                                                                                 ,3173
+Rancho Viejo (Progreso Cuarta Sección)                                                                        ,3219
+Baja Beach and Tennis Club                                                                                    ,3283
+San Antonio [Bodegas]                                                                                         ,3289
+Campo Número Cinco                                                                                            ,3329
+Artículo Ciento Quince                                                                                        ,3368
+Ejido el Ajusco                                                                                               ,3381
+Ejido Jatay                                                                                                   ,3382
+Las Palmas (Colonia Colorado Número Tres)                                                                     ,3479
+Familia Solorio                                                                                               ,3564
+El Encanto                                                                                                    ,3570
+Las Lomas [Residencial Campestre]                                                                             ,3593
+Las Palmas [Rancho]                                                                                           ,3602
+Brisas del Mar                                                                                                ,3606
+Martín Ortíz                                                                                                  ,3616
+Jatay de Cutuy                                                                                                ,3625
+Tres Cruces [Rancho]                                                                                          ,3658
+Rivas [Rancho],3660
+Parcela Ocho (Ejido Nacionalista)                                                                             ,3691
+Parcela Número Seis (Ejido Nacionalista)                                                                      ,3697
+Parcela Número Cuarenta y Tres (Ejido Nacionalista)                                                           ,3706
+Parcela Cuarenta y Nueve (Ejido Nacionalista)                                                                 ,3726
+Parcela Número Cincuenta y Siete (Familia Arce)                                                               ,3732
+Parcela Número Sesenta (Ejido Nacionalista)                                                                   ,3735
+Parcela Noventa y Ocho                                                                                        ,3756
+Parcela Número Ciento Treinta y Nueve (Ejido Nacionalista)                                                    ,3783
+Parcela Número Ciento Sesenta y Uno (Ejido Nacionalista)                                                      ,3800
+Bodegas del Valle                                                                                             ,3831
+Puerto el Zeppelín (Campo Kennedy)                                                                            ,3834
+Viñedos el Tigre                                                                                              ,3946
+Rancho González                                                                                               ,3950
+Campo Número Nueve                                                                                            ,4342
+El Morro                                                                                                      ,4444
+Adobe Guadalupe                                                                                               ,4488
+II Sección Ejido Esteban Cantú                                                                                ,4523
+Nuevo Milenium                                                                                                ,4695
+Fraccionamiento del Valle                                                                                     ,4702
+Granjas Arcoíris                                                                                              ,4729
+El Sauzalito                                                                                                  ,4730
+Los Manantiales                                                                                               ,4747
+Ninguno                                                                                                       ,4754
+Palillo                                                                                                       ,4763
+Buen Rostro                                                                                                   ,4774
+Colonia Progreso Segunda Sección                                                                              ,4796
+Lázaro Cárdenas [Ejido Colectivo]                                                                             ,4839
+Familia Sánchez                                                                                               ,4852
+Don Manuel                                                                                                    ,4877
+Familia Álvarez                                                                                               ,4904
+Balcones Cíbolas del Mar                                                                                      ,4925
+Playa Cibola del Mar                                                                                          ,4930
+Ninguno [Familia Pérez]                                                                                       ,4962
+Brechas el Mirador                                                                                            ,4973
+Hacienda Mexicali [Hotel]                                                                                     ,4986
+Nicoya [Parque Industrial]                                                                                    ,4992
+Valle del Puebla [Parque Industrial]                                                                          ,4995
+Compañía Siderúrgica de California                                                                            ,4997
+Cipsa                                                                                                         ,5006
+Familia Vega                                                                                                  ,5021
+Colinas del Pedregal                                                                                          ,5037
+Familia Fernández                                                                                             ,5075
+Valle del Sol [Rancho]                                                                                        ,5105
+Ninguno [Estación de Servicio]                                                                                ,5107
+Lindavista                                                                                                    ,5122
+Familia Romero                                                                                                ,5133
+Las Mariposas [Rancho]                                                                                        ,5153
+Coronel Esteban Cantú [Tercera Sección]                                                                       ,5155
+La Hermosa del Sauco                                                                                          ,5163
+Rancho Virginia del Mar                                                                                       ,5167
+Barón Balché                                                                                                  ,5172
+Genaro Vázquez Rojas [Fraccionamiento Popular]                                                                ,5187
+Casa de Retiro Arcoíris                                                                                       ,5223
+Crucero Nuevo León                                                                                            ,5225
+Tierra Santa                                                                                                  ,5285
+Casa Horizonte                                                                                                ,5323
+Clam Beach [Campamento]                                                                                       ,5324
+La Escondida                                                                                                  ,5329
+Familia Flores                                                                                                ,5374
+Familia Garibay                                                                                               ,5446
+El Chimal                                                                                                     ,5468
+Familia Meza (Colonia Progreso)                                                                               ,5489
+Ramos                                                                                                         ,5528
+Familia Arce                                                                                                  ,5534
+El Chueco                                                                                                     ,5551
+Yuma Water                                                                                                    ,5663
+Fuego Viñedo                                                                                                  ,5771
+El Coyote [Rancho]                                                                                            ,5892
+Campo Meneses                                                                                                 ,5907
+Cadena Comercial Oxxo S.A. de C.V.                                                                            ,7065
+Jefe Rex Jara [Trituradora],7217
