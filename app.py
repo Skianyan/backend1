@@ -24,9 +24,6 @@ app = Flask(__name__)
 df_maestro = pd.DataFrame() 
 
 def load_master_dataframe():
-    """
-    Carga y une todos los catálogos necesarios en un solo DataFrame maestro.
-    """
     global df_maestro
 
     try:
@@ -39,7 +36,15 @@ def load_master_dataframe():
         df_act   = pd.read_csv(FILE_ACTIVIDAD, encoding='latin1')
         df_ta    = pd.read_csv(FILE_TIPOASENT, encoding='latin1')
 
-        # 2. Unión principal con Datos
+        # 1.1 Fecha y año de registro SOBRE df_datos
+        df_datos['fecha_alta'] = pd.to_datetime(
+            df_datos['fecha_alta'],
+            errors='coerce',
+            infer_datetime_format=True
+        )
+        df_datos['year_registro'] = df_datos['fecha_alta'].dt.year
+
+        # 2. Unión principal con Datos (ya incluye year_registro)
         df = df_datos.copy()
 
         # 2.1 Municipio
@@ -78,7 +83,6 @@ def load_master_dataframe():
         )
 
         # 2.6 Datos de contacto (telefono, correo, www)
-        # Asegurar que las llaves estén en el mismo tipo
         df_cont['id'] = df_cont['id'].astype('int64')
         df = df.merge(
             df_cont[['id', 'telefono', 'correoelec', 'www']],
@@ -102,6 +106,7 @@ def load_master_dataframe():
         df_maestro = pd.DataFrame()
 
 
+
 # --- RUTAS DE LA APLICACIÓN ---
 
 # 1. Ruta Raíz (Para servir el index.html)
@@ -110,6 +115,21 @@ def index():
     # Recuerda que index.html debe estar en una carpeta llamada 'templates'
     return render_template('index.html')
 
+@app.route('/api/years_disponibles')
+def api_years_disponibles():
+    global df_maestro
+    if df_maestro is None or df_maestro.empty:
+        return jsonify([])
+
+    years = (
+        df_maestro['year_registro']
+        .dropna()
+        .astype(int)
+        .sort_values()
+        .unique()
+        .tolist()
+    )
+    return jsonify(years)
 
 # 2. Endpoint de API (Para la consulta BBOX)
 @app.route('/api/datos_negocios')
@@ -118,7 +138,7 @@ def api_datos_negocios():
     if df_maestro is None or df_maestro.empty:
         return jsonify({"error": "Datos no cargados"}), 500
 
-    # 1. Leer parámetros de la vista
+    # 1. Parámetros de BBOX
     try:
         lat_min = float(request.args.get('lat_min'))
         lat_max = float(request.args.get('lat_max'))
@@ -127,7 +147,6 @@ def api_datos_negocios():
     except (TypeError, ValueError):
         return jsonify({"error": "Parámetros de coordenadas inválidos"}), 400
 
-    # 2. Filtrar por bounding box
     df_filtrado = df_maestro[
         (df_maestro['latitud']  >= lat_min) &
         (df_maestro['latitud']  <= lat_max) &
@@ -135,24 +154,32 @@ def api_datos_negocios():
         (df_maestro['longitud'] <= lon_max)
     ]
 
-    # 3. Seleccionar columnas que vas a exponer
+    # 2. Filtro opcional por año de registro
+    year = request.args.get('year', default=None, type=int)
+    if year is not None:
+        df_filtrado = df_filtrado[df_filtrado['year_registro'] == year]
+
+
+    # 3. Columnas que vas a exponer al mapa
     columnas_salida = [
-        'nom_estab',     # Datos
-        'raz_social',    # Datos
-        'municipio',     # Dic_Municipio
-        'localidad',     # Dic_Localidad
-        'nombre_act',    # Dic_Actividad
-        'tipo_asent',    # Dic_TipoAsent
-        'telefono',      # Contacto
-        'correoelec',    # Contacto
-        'www',           # Contacto
-        'cod_postal',    # Direccion
+        'nom_estab',
+        'raz_social',
+        'municipio',
+        'localidad',
+        'nombre_act',
+        'tipo_asent',
+        'telefono',
+        'correoelec',
+        'www',
+        'cod_postal',
         'latitud',
         'longitud',
+        'year_registro',
     ]
+
     datos_respuesta = df_filtrado[columnas_salida].copy()
 
-    # Normalizar NaN -> None para que el JSON sea válido
+    # 4. Limpiar NaN -> None para JSON válido
     datos_respuesta = datos_respuesta.astype(object).where(
         pd.notnull(datos_respuesta),
         None
